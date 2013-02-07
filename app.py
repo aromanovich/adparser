@@ -148,7 +148,8 @@ def to_summary(data):
 supported_sites = {
     'e1.ru': (parse_e1, 'cp1251'),
     'avito.ru': (parse_avito, 'utf8'),
-    'slando.ru': (parse_slando, 'utf8'),
+    # Due to ConnectionError on Heroku
+    # 'slando.ru': (parse_slando, 'utf8'),
 }
 
 
