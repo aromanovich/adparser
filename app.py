@@ -9,6 +9,9 @@ from flask import Flask, render_template, request
 
 
 app = Flask(__name__)
+app.config.update(
+    DEBUG=True
+)
 
 
 def q(document, css3_selector, immediate=False):
@@ -177,4 +180,4 @@ def hello_world():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
