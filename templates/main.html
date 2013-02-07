@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Парсер объявлений</title>
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <style>
+      body {
+        margin: 30px;
+      }
+      textarea {
+        display: block;
+        width: 600px;
+        height: 330px;
+      }
+    </style>
+  </head>
+  <body>
+  <h3>Парсер объявлений <small>(e1.ru, avito.ru, slando.ru)</small></h3>
+    <form method="POST">
+      <textarea name="urls" placeholder="Список адресов объявлений, по одному на строку."></textarea>
+      <button type="submit" class="btn">Отправить</button>
+    </form>
+    {% if result %}
+      {% for url, summary in result %}
+        <a href="{{ url }}">{{ url }}</a>{% if summary %} &mdash; {{ summary }}{% endif %}<br>
+      {% endfor %}
+    {% endif %}
+  </body>
+</html>
