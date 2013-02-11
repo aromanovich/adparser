@@ -8,13 +8,13 @@ from cssselect import GenericTranslator
 from flask import Flask, render_template, request
 
 
-app = Flask(__name__)
-app.config.update(
-    DEBUG=True
-)
-
-
 def q(document, css3_selector, immediate=False):
+    """Returns the text content of the element.
+
+    :param immediate: if true, processes only immediate text nodes.
+    :type document: :class:`lxml.html.HtmlElement`
+    :type css3_selector: :class:`basestring`
+    """
     expression = GenericTranslator().css_to_xpath(css3_selector)
 
     text = None
@@ -118,14 +118,14 @@ def to_summary(data):
     result = u''
 
     type_ = data.get('type')
-    if type_ == 'flat':
+    if type_ == u'flat':
         result += u'%sкв' % data['rooms']
-    elif type_ == 'room':
+    elif type_ == u'room':
         result += u'комната'
 
     price = data.get('price')
     if price:
-        result += ', %i' % price
+        result += u', %i' % price
 
     payments_included = data.get('payments_included')
     if payments_included is not None:
@@ -136,11 +136,11 @@ def to_summary(data):
 
     address = data.get('address')
     if address:
-        result += ', %s' % address
+        result += u', %s' % address
 
     district = data.get('district')
     if district is not None:
-        result += ' (%s)' % district
+        result += u' (%s)' % district
 
     return result
 
@@ -168,8 +168,12 @@ def parse_ad(url):
             pass
 
 
+app = Flask(__name__)
+app.config.update(DEBUG=True)
+
+
 @app.route('/', methods=['GET', 'POST'])
-def hello_world():
+def main():
     context = {}
 
     input_ = request.form.get('urls')

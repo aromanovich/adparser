@@ -13,18 +13,27 @@
         width: 600px;
         height: 330px;
       }
+      ul {
+        padding: 0;
+        list-style: none;
+      }
     </style>
   </head>
   <body>
-  <h3>Парсер объявлений <small>(e1.ru, avito.ru)</small></h3>
+    <h3>Парсер объявлений <small>(e1.ru, avito.ru)</small></h3>
     <form method="POST">
       <textarea name="urls" placeholder="Список адресов объявлений, по одному на строку"></textarea>
       <button type="submit" class="btn">Отправить</button>
     </form>
     {% if result %}
-      {% for url, summary in result %}
-        <a href="{{ url }}">{{ url }}</a>{% if summary %} &mdash; {{ summary }}{% endif %}<br>
-      {% endfor %}
+      <ul>
+        {% for url, summary in result %}
+          <li>
+            <a href="{{ url }}">{{ url }}</a>
+            {% if summary %} &mdash; {{ summary }}{% endif %}
+          </li>
+        {% endfor %}
+      </ul>
     {% endif %}
   </body>
 </html>
